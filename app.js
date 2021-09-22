@@ -32,13 +32,39 @@ function updateQuantity(id, isIncresing) {
 
     // update product price
     if (id == 'mobile') {
-        const mobileTotal = document.getElementById('mobile-total');
+        const mobileTotal = document.getElementById(id + '-total');
         mobileTotal.innerText = productNumber * 1219;
     }
     else {
-        const caseTotal = document.getElementById('case-total');
+        const caseTotal = document.getElementById(id + '-total');
         caseTotal.innerText = productNumber * 59;
     }
+
+
+    // calculate total
+
+    calculateTotal();
+}
+
+
+function getInputValue(id) {
+    const productInput = document.getElementById(id + '-number');
+    const productNumber = parseInt(productInput.value)
+
+    return productNumber;
+}
+
+function calculateTotal() {
+    const mobileTotal = getInputValue('mobile') * 1219;
+    const caseTotal = getInputValue('case') * 59;
+
+    const subTotal = mobileTotal + caseTotal;
+    const tax = subTotal / 10;
+    const totalPrice = subTotal + tax;
+
+    document.getElementById('sub-total').innerText = subTotal;
+    document.getElementById('total-tax').innerText = tax;
+    document.getElementById('total-price').innerText = totalPrice;
 }
 
 
